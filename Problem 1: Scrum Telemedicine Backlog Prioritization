@@ -1,0 +1,77 @@
+# Problem 1: Applying Scrum in a Telemedicine App Project
+# Implementation: Product Backlog Prioritization System
+
+class BacklogItem:
+    def __init__(self, feature, business_value, urgency, effort):
+        self.feature = feature
+        self.business_value = business_value
+        self.urgency = urgency
+        self.effort = effort
+
+    def calculate_priority(self):
+        return (self.business_value + self.urgency) / self.effort
+
+
+class ScrumBacklog:
+    def __init__(self):
+        self.backlog = []
+        
+    def add_feature(self, feature, business_value, urgency, effort):
+        item = BacklogItem(feature, business_value, urgency, effort)
+        self.backlog.append(item)
+
+    def prioritize_backlog(self):
+        return sorted(
+            self.backlog,
+            key=lambda item: item.calculate_priority(),
+            reverse=True
+        )
+
+    def display_backlog(self):
+        prioritized_items = self.prioritize_backlog()
+
+        print("\nTELEMEDICINE PRODUCT BACKLOG")
+        print("-" * 65)
+
+        print(
+            f"{'Feature':25}"
+            f"{'Value':10}"
+            f"{'Urgency':10}"
+            f"{'Effort':10}"
+            f"{'Priority':10}"
+        )
+
+        print("-" * 65)
+
+        for item in prioritized_items:
+            print(
+                f"{item.feature:25}"
+                f"{item.business_value:<10}"
+                f"{item.urgency:<10}"
+                f"{item.effort:<10}"
+                f"{item.calculate_priority():.2f}"
+            )
+
+
+backlog = ScrumBacklog()
+
+backlog.add_feature("Video Consultation", 10, 9, 5)
+backlog.add_feature("Doctor Appointment", 9, 8, 3)
+backlog.add_feature("Online Payment", 7, 6, 4)
+backlog.add_feature("Medical Records", 8, 7, 6)
+backlog.add_feature("Chat with Doctor", 9, 9, 4)
+
+backlog.display_backlog()
+
+output:
+TELEMEDICINE PRODUCT BACKLOG
+-----------------------------------------------------------------
+Feature                  Value     Urgency   Effort    Priority  
+-----------------------------------------------------------------
+Doctor Appointment       9         8         3         5.67
+Chat with Doctor         9         9         4         4.50
+Video Consultation       10        9         5         3.80
+Online Payment           7         6         4         3.25
+Medical Records          8         7         6         2.50
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/dbdaf9ab-6220-4189-be05-3d2793b3e165" />
