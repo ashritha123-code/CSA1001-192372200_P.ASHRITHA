@@ -1,0 +1,92 @@
+Problem 5: Ethical Evaluation of an AI Hiring System
+
+Implementation: AI Hiring Bias Detection and Fairness Evaluation System
+
+class AIHiringSystem:
+    def __init__(self):
+        self.applicants = []
+
+    def add_applicant(self, name, group, score, selected):
+        applicant = {
+            "name": name,
+            "group": group,
+            "score": score,
+            "selected": selected
+        }
+
+        self.applicants.append(applicant)
+
+    def calculate_selection_rate(self, group):
+        group_applicants = [
+            applicant for applicant in self.applicants
+            if applicant["group"] == group
+        ]
+
+        selected_applicants = [
+            applicant for applicant in group_applicants
+            if applicant["selected"] == "yes"
+        ]
+
+        if len(group_applicants) == 0:
+            return 0
+
+        return len(selected_applicants) / len(group_applicants) * 100
+
+    def display_report(self):
+        groups = set(
+            applicant["group"]
+            for applicant in self.applicants
+        )
+
+        print("\nAI HIRING FAIRNESS REPORT")
+        print("-" * 45)
+
+        rates = {}
+
+        for group in groups:
+            rate = self.calculate_selection_rate(group)
+            rates[group] = rate
+            print(group, "Selection Rate:", round(rate, 2), "%")
+
+        if max(rates.values()) - min(rates.values()) > 20:
+            print("\nPotential Bias Detected")
+        else:
+            print("\nNo Significant Bias Detected")
+
+
+system = AIHiringSystem()
+
+number = int(input("Enter number of applicants: "))
+
+for i in range(number):
+    print("\nApplicant", i + 1)
+
+    name = input("Enter applicant name: ")
+    group = input("Enter applicant group: ")
+    score = float(input("Enter applicant score: "))
+    selected = input("Selected (yes/no): ").lower()
+
+    system.add_applicant(name, group, score, selected)
+
+system.display_report()
+
+output:
+Enter number of applicants: 2
+
+Applicant 1
+Enter applicant name: chakri
+Enter applicant group: A
+Enter applicant score: 85
+Selected (yes/no): no
+
+Applicant 2
+Enter applicant name: punith
+Enter applicant group: A
+Enter applicant score: 90
+Selected (yes/no): yes
+
+AI HIRING FAIRNESS REPORT
+---------------------------------------------
+A Selection Rate: 50.0 %
+
+No Significant Bias Detected
