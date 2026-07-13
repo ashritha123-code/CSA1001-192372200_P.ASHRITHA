@@ -1,0 +1,77 @@
+Problem 3: Lean + XP in a Real-Time Tutoring Platform
+
+Implementation: Lean and XP Based Tutoring Session Management System
+
+class TutoringPlatform:
+    def __init__(self):
+        self.sessions = []
+
+    def book_session(self, student, tutor, subject):
+        session = {
+            "student": student,
+            "tutor": tutor,
+            "subject": subject,
+            "status": "Booked"
+        }
+
+        self.sessions.append(session)
+        print("Tutoring session booked successfully")
+
+    def complete_session(self, student):
+        for session in self.sessions:
+            if session["student"] == student:
+                session["status"] = "Completed"
+                print("Session completed successfully")
+                return
+
+        print("Session not found")
+
+    def display_sessions(self):
+        print("\nREAL-TIME TUTORING PLATFORM")
+        print("-" * 50)
+
+        for session in self.sessions:
+            print("Student :", session["student"])
+            print("Tutor   :", session["tutor"])
+            print("Subject :", session["subject"])
+            print("Status  :", session["status"])
+            print("-" * 50)
+
+
+platform = TutoringPlatform()
+
+student = input("Enter student name: ")
+tutor = input("Enter tutor name: ")
+subject = input("Enter subject: ")
+
+platform.book_session(student, tutor, subject)
+platform.display_sessions()
+
+complete = input("Complete the session? (yes/no): ")
+
+if complete.lower() == "yes":
+    platform.complete_session(student)
+
+platform.display_sessions()
+
+Output:
+Enter student name: punith reddy
+Enter tutor name: dr.r.surendran
+Enter subject: software engneering
+Tutoring session booked successfully
+
+REAL-TIME TUTORING PLATFORM
+--------------------------------------------------
+Student : punith reddy
+Tutor   : dr.r.surendran
+Subject : software engneering
+Status  : Booked
+--------------------------------------------------
+Complete the session? (yes/no): y
+
+REAL-TIME TUTORING PLATFORM
+--------------------------------------------------
+Student : punith reddy
+Tutor   : dr.r.surendran
+Subject : software engneering
+Status  : Booked
