@@ -1,0 +1,78 @@
+Problem 4: Scaling Agile Using SAFe for Banking Software
+
+Implementation: SAFe-Based Program Increment Planning and Team Coordination System
+
+
+class SAFePlanning:
+    def __init__(self):
+        self.teams = []
+
+    def add_team(self, team_name, feature, risk):
+        team = {
+            "team": team_name,
+            "feature": feature,
+            "risk": risk,
+            "status": "Planned"
+        }
+
+        self.teams.append(team)
+        print("Team added successfully")
+
+    def update_status(self, team_name, status):
+        for team in self.teams:
+            if team["team"] == team_name:
+                team["status"] = status
+                print("Status updated successfully")
+                return
+
+        print("Team not found")
+
+    def display_pi_plan(self):
+        print("\nSAFe PROGRAM INCREMENT PLAN")
+        print("-" * 60)
+
+        for team in self.teams:
+            print("Team    :", team["team"])
+            print("Feature :", team["feature"])
+            print("Risk    :", team["risk"])
+            print("Status  :", team["status"])
+            print("-" * 60)
+
+
+planning = SAFePlanning()
+
+team_name = input("Enter team name: ")
+feature = input("Enter assigned feature: ")
+risk = input("Enter project risk: ")
+
+planning.add_team(team_name, feature, risk)
+planning.display_pi_plan()
+
+status = input("Enter new status: ")
+
+Output:
+Enter team name: SSS rankers
+Enter assigned feature: student council
+Enter project risk: stundent mmangement
+Team added successfully
+
+SAFe PROGRAM INCREMENT PLAN
+------------------------------------------------------------
+Team    : SSS rankers
+Feature : student council
+Risk    : stundent mmangement
+Status  : Planned
+------------------------------------------------------------
+Enter new status: in progress
+Status updated successfully
+
+SAFe PROGRAM INCREMENT PLAN
+------------------------------------------------------------
+Team    : SSS rankers
+Feature : student council
+Risk    : stundent mmangement
+Status  : in progress
+------------------------------------------------------------
+planning.update_status(team_name, status)
+
+planning.display_pi_plan()
